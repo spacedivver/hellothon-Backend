@@ -14,7 +14,6 @@ import java.util.Date;
 public class ConvDTO {
 
     private int cno;
-    private int idx;
     private String question;
     private String answer;
     private Date createdAt;

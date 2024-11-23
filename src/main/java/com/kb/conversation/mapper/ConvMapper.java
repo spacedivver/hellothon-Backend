@@ -11,6 +11,6 @@ import java.util.List;
 public interface ConvMapper {
 
     void insertConversation(ConvDTO convDTO);
-    List<ConvDTO> getConversationsByMno(@Param("createdAt") Date createdAt);
-    void deleteConversationsByMno(@Param("createdAt") Date createdAt);
+    List<ConvDTO> getConversationsByMno(@Param("createdAt") String createdAt);
+    void deleteConversationsByMno(@Param("createdAt") String createdAt);
 }

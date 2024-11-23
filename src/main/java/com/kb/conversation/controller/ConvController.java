@@ -29,14 +29,14 @@ public class ConvController {
         return ResponseEntity.ok("채팅 기록이 저장되었습니다.");
     }
 
-    @GetMapping("/{createAt}")
-    public ResponseEntity<List<ConvDTO>> getConversationsByCreatedAt(@PathVariable Date createAt) {
-        List<ConvDTO> conversations = convService.getConversationsByCreatedAt(createAt);
+    @GetMapping("/{createdAt}")
+    public ResponseEntity<List<ConvDTO>> getConversationsByCreatedAt(@PathVariable String createdAt) {
+        List<ConvDTO> conversations = convService.getConversationsByCreatedAt(createdAt);
         return ResponseEntity.ok(conversations);
     }
 
     @DeleteMapping("/{createAt}")
-    public ResponseEntity<String> deleteConversationsByCreatedAt(@PathVariable Date createAt) {
+    public ResponseEntity<String> deleteConversationsByCreatedAt(@PathVariable String createAt) {
         convService.deleteConversationsByCreatedAt(createAt);
         return ResponseEntity.ok("채팅 기록이 삭제되었습니다.");
     }

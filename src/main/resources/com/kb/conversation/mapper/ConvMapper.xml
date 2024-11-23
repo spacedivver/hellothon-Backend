@@ -7,13 +7,13 @@
 
     <!-- 채팅 기록 저장 -->
     <insert id="insertConversation" parameterType="com.kb.conversation.dto.ConvDTO">
-        INSERT INTO conversation (idx, question, answer, createdAt)
-        VALUES (#{idx}, #{question}, #{answer}, default)
+        INSERT INTO conversation (question, answer, createdAt)
+        VALUES (#{question}, #{answer}, default)
     </insert>
 
     <!-- 특정 멤버의 채팅 기록 조회 -->
-    <select id="getConversationsByMno" resultType="com.kb.conversation.dto.ConvDTO">
-        SELECT cno, idx, question, answer, createdAt
+    <select id="getConversationsByMno" parameterType="String" resultType="com.kb.conversation.dto.ConvDTO">
+        SELECT cno, question, answer, createdAt
         FROM conversation
         WHERE createdAt = #{createdAt}
     </select>

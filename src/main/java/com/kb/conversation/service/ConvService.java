@@ -18,11 +18,11 @@ public class ConvService {
         convMapper.insertConversation(convDTO);
     }
 
-    public List<ConvDTO> getConversationsByCreatedAt(Date createdAt) {
+    public List<ConvDTO> getConversationsByCreatedAt(String createdAt) {
         return convMapper.getConversationsByMno(createdAt);
     }
 
-    public void deleteConversationsByCreatedAt(Date createdAt) {
+    public void deleteConversationsByCreatedAt(String createdAt) {
         convMapper.deleteConversationsByMno(createdAt);
     }
 }
