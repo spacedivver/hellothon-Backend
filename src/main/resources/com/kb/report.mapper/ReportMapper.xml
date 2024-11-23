@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kb.report.mapper.ReportMapper">
+    <insert id="insertReport">
+        INSERT INTO report (rno, life, health, food, hobby, etc, createdAt)
+        VALUES (#{rno}, #{life}, #{health}, #{food}, #{hobby}, #{etc}, default);
+    </insert>
+
+    <select id="getReportById" resultType="com.kb.report.dto.ReportDTO">
+        SELECT rno, life, health, food, hobby, etc, createdAt
+        FROM report
+        WHERE rno = #{rno};
+    </select>
+
+    <update id="updateReport">
+        UPDATE report
+        SET content = #{content}
+        WHERE rno = #{rno};
+    </update>
+</mapper>
