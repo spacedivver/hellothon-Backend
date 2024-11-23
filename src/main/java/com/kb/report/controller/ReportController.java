@@ -9,7 +9,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/report")
@@ -35,6 +34,7 @@ public class ReportController {
 
     @GetMapping("/{createdAt}")
     public ResponseEntity<ReportDTO> getReportByCreatedAt(@PathVariable String createdAt) {
+//        createdAt = createdAt.replaceAll("[{}]", "").trim();
         ReportDTO reports = reportService.getReportByCreatedAt(createdAt);
         return ResponseEntity.ok(reports);
     }

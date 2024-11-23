@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kb.audio.mapper.AudioMapper">
+
+    <insert id="insertAudioFile" parameterType="com.kb.audio.dto.AudioDTO">
+        INSERT INTO audio_files (filename, audio_data)
+        VALUES (#{filename}, #{audioData})
+        ON DUPLICATE KEY UPDATE
+        filename = VALUES(filename),
+        audio_data = VALUES(audio_data);
+    </insert>
+
+
+    <select id="getAudioByFilename" parameterType="String" resultType="com.kb.audio.dto.AudioDTO">
+        SELECT ano, filename, audio_data
+        FROM audio_files
+        WHERE filename = #{filename};
+    </select>
+</mapper>
