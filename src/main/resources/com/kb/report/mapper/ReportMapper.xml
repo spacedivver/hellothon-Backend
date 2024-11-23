@@ -5,8 +5,8 @@
 
 <mapper namespace="com.kb.report.mapper.ReportMapper">
     <insert id="insertReport">
-        INSERT INTO report (rno, life, health, food, hobby, etc, createdAt)
-        VALUES (#{rno}, #{life}, #{health}, #{food}, #{hobby}, #{etc}, default);
+        INSERT INTO report (life, health, food, hobby, etc, createdAt)
+        VALUES (#{life}, #{health}, #{food}, #{hobby}, #{etc}, default);
     </insert>
 
     <select id="getReportById" resultType="com.kb.report.dto.ReportDTO">

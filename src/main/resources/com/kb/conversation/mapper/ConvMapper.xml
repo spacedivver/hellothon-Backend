@@ -7,8 +7,8 @@
 
     <!-- 채팅 기록 저장 -->
     <insert id="insertConversation" parameterType="com.kb.conversation.dto.ConvDTO">
-        INSERT INTO conversation (cno, idx, question, answer, createdAt)
-        VALUES (#{cno}, #{mno}, #{idx}, #{question},, #{answer}, default)
+        INSERT INTO conversation (idx, question, answer, createdAt)
+        VALUES (#{idx}, #{question}, #{answer}, default)
     </insert>
 
     <!-- 특정 멤버의 채팅 기록 조회 -->
