@@ -10,6 +10,6 @@ import java.util.List;
 @Mapper
 public interface ReportMapper {
     void insertReport(ReportDTO report);
-    List<ReportDTO> getReportsByCreatedAt(@Param("createdAt") String createdAt);
+    ReportDTO getReportsByCreatedAt(@Param("createdAt") String createdAt);
     void updateReport(ReportDTO report);
 }

@@ -1,18 +1,17 @@
 package com.kb.report.service;
 
 
-import com.kb.conversation.dto.ConvDTO;
-import com.kb.conversation.mapper.ConvMapper;
 import com.kb.report.dto.ReportDTO;
 import com.kb.report.mapper.ReportMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
-import java.util.List;
 
 @Log4j
 @Service
@@ -21,17 +20,19 @@ import java.util.List;
 public class ReportService {
 
     private final ReportMapper reportMapper;
+    @Value("${ai.execute.path}")
+    private String aiDirectoryPath;
 
-    public String generateReport(String json) {
+    public String generateReport(String createdAt) {
         try {
-            // Python 스크립트 경로
-            String pythonScriptPath = "report.py"; // 실제 Python 스크립트 경로로 수정
 
-            // Python 스크립트 실행
-            ProcessBuilder processBuilder = new ProcessBuilder("python3", pythonScriptPath, json);
+            File workingDirectory = new File(aiDirectoryPath);
+            String pythonScriptPath = "report.py";
+
+            ProcessBuilder processBuilder = new ProcessBuilder("python", pythonScriptPath, createdAt);
+            processBuilder.directory(workingDirectory);
             processBuilder.redirectErrorStream(true);
 
-            // Python 스크립트 실행 및 결과 읽기
             Process process = processBuilder.start();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             StringBuilder output = new StringBuilder();
@@ -40,10 +41,8 @@ public class ReportService {
                 output.append(line).append("\n");
             }
 
-            // 프로세스 종료 대기
             process.waitFor();
 
-            // Python 스크립트의 결과 반환
             return output.toString();
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,7 +50,7 @@ public class ReportService {
         }
     }
 
-    public List<ReportDTO> getReportByCreatedAt(String createdAt) {
+    public ReportDTO getReportByCreatedAt(String createdAt) {
         return reportMapper.getReportsByCreatedAt(createdAt);
     }
 }

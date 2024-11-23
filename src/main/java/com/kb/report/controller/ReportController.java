@@ -1,12 +1,10 @@
 package com.kb.report.controller;
 
-import com.kb.conversation.dto.ConvDTO;
 import com.kb.report.dto.ReportDTO;
 import com.kb.report.service.ReportService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,13 +20,12 @@ import java.util.List;
 public class ReportController {
 
     private final ReportService reportService;
-    @PostMapping("")
-    public ResponseEntity<String> generateReport(@RequestBody String json) {
-        try {
-            // ReportService에서 리포트 생성 요청
-            String result = reportService.generateReport(json);
 
-            // 결과 반환
+    @PostMapping("")
+    public ResponseEntity<String> generateReport(@RequestBody String createdAt) {
+        try {
+            String result = reportService.generateReport(createdAt);
+
             return ResponseEntity.ok(result);
         } catch (Exception e) {
             e.printStackTrace();
@@ -37,8 +34,8 @@ public class ReportController {
     }
 
     @GetMapping("/{createdAt}")
-    public ResponseEntity<List<ReportDTO>> getReportByCreatedAt(@PathVariable String createdAt) {
-        List<ReportDTO> reports = reportService.getReportByCreatedAt(createdAt);
+    public ResponseEntity<ReportDTO> getReportByCreatedAt(@PathVariable String createdAt) {
+        ReportDTO reports = reportService.getReportByCreatedAt(createdAt);
         return ResponseEntity.ok(reports);
     }
 }
